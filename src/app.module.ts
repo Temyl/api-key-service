@@ -12,14 +12,13 @@ import { AuthService } from './modules/auth/auth.service';
       isGlobal: true, // makes process.env variables available globally
     }),
     TypeOrmModule.forRoot({
-      type: 'postgres', // or your database
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '5432', 10),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [User, ApiKey],
-      synchronize: true, // ⚠️ disable in production
+      type: 'postgres',
+      host: process.env.DATABASE_HOST,
+      port: parseInt(process.env.DATABASE_PORT || '5432', 10),
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
+      synchronize: false,
     }),
     TypeOrmModule.forFeature([User, ApiKey]), // inject repositories
   ],
