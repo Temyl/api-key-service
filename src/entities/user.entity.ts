@@ -11,13 +11,11 @@ export class User extends BaseEntity {
 
     @Column({ 
         name: 'password', 
-        nullable: true 
     })
     passwordHash: string;
 
     @Column({
         name: 'full_name',
-        nullable: true
     })
     fullName: string;
 

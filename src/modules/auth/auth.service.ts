@@ -17,14 +17,14 @@ export class AuthService {
   ) {}
 
   /** Sign up a new user */
-  async signup(email: string, password: string, name?: string) {
+  async signup(email: string, password: string, name: string) {
     const existing = await this.usersRepo.findOne({ where: { email } });
     if (existing) throw new BadRequestException('Email already exists');
 
     const passwordHash = await bcrypt.hash(password, 12);
     const user = this.usersRepo.create({
-      email,
-      passwordHash, // store hashed password
+      email: email,
+      passwordHash: passwordHash, // store hashed password
       fullName: name,
     });
 

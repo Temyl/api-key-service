@@ -19,6 +19,7 @@ import { AuthService } from './modules/auth/auth.service';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       synchronize: false,
+      autoLoadEntities: true,
     }),
     TypeOrmModule.forFeature([User, ApiKey]), // inject repositories
   ],
