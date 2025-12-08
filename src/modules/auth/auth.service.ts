@@ -21,7 +21,7 @@ export class AuthService {
     const existing = await this.usersRepo.findOne({ where: { email } });
     if (existing) throw new BadRequestException('Email already exists');
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    const passwordHash = await bcrypt.hash(password, 10);
     const user = this.usersRepo.create({
       email: email,
       passwordHash: passwordHash, // store hashed password
@@ -70,8 +70,10 @@ export class AuthService {
       parseInt(process.env.API_KEY_LENGTH_BYTES || '32', 10),
     );
 
+    const hashKey = await bcrypt.hash(rawKey, 10);
+
     const record = this.keysRepo.create({
-      key: rawKey, // consider hashing in production
+      key: hashKey, 
       name,
       active: true,
       expiresAt: expiresAt ? new Date(expiresAt) : null,
